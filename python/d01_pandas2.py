@@ -52,4 +52,4 @@ print(df4.tail())
 df3.to_csv('pandas2.csv',header='False')
 #pandas csv파일 읽기
 df5 = pd.read_csv('pandas2.csv',encoding='utf-8')
-print(df5)
+#print(df5)
