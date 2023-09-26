@@ -53,7 +53,7 @@ print(character2)
 print("#"*25)
 print()
 print()
-print(script101)
+#print(script101)
 
 ch = 'Scene:'
 ch = re.sub(':','',ch)
@@ -66,10 +66,10 @@ a1 = re.findall(r'[a-z]+@[a-z.]+',a)
 print(a1)
 
 ##############################
-words = ['apples', 'cat', 'brave', 'drama', 'asise', 'blow', 'coat', 'above']
+words = ['apples', 'cat', 'brave abc', 'drama', 'asise', 'blow', 'coat', 'above']
 mm = []
 for i in words:
-  mm += re.findall('a[a-z]+',i)
+  mm += re.findall(r'a[a-z]+',i)
 print(mm)
 
 for i in words:

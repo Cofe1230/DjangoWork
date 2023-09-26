@@ -49,8 +49,6 @@ print("#"*20)
 #<.+?> 표현식에 해당하는 문자열을 공백으로 변경
 body = re.sub('<.+?>','',body)
 print(body)
-for i in z :
-  print(i)
 
 
 
