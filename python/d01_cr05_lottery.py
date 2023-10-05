@@ -1,6 +1,5 @@
 import requests;
 from bs4 import BeautifulSoup
-import re
 
 res = requests.get("https://m.dhlottery.co.kr/gameResult.do?method=byWin")
 soup = BeautifulSoup(res.content,"html.parser")

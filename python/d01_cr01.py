@@ -23,3 +23,4 @@ print(p1)
 
 #h1의 문자만 출력해보자
 print("h1 : ", h1.string)
+
