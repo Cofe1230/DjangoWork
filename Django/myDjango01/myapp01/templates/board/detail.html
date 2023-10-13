@@ -12,7 +12,7 @@
   wrtier : {{dto.writer}}<br/>
   title : {{dto.title}}<br/>
   content : {{dto.content}}<br/>
-  post_date : {{dto.post_date}}<br/>
+  post_date : {{dto.post_date|date:'Y-m-d'}}<br/>
   file : {{dto.filename}}<br/>
   <a href="">수정</a> | 
   <a href="/delete/{{dto.idx}}">삭제</a>
