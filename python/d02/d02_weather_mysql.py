@@ -1,54 +1,49 @@
-import pymysql;
-import requests;
-from bs4 import BeautifulSoup;
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+from bs4 import BeautifulSoup
+import requests
+import pymysql
 
-#db에서 불러와서 그래프로 그리기
-
-#db연결
-dbURL = '127.0.0.1'
+# 제목 평점 예매율
+dbURL = "127.0.0.1"
 dbPort = 3306
-dbUser = 'root'
-dbPass = 'root'
+dbUser = "root"
+dbPass = "root"
 
-conn = pymysql.connect(host=dbURL,port=dbPort,user=dbUser, passwd=dbPass,
+conn = pymysql.connect(host=dbURL, port=dbPort, user=dbUser, passwd=dbPass,
                        db='bigdb', charset='utf8', use_unicode=True)
+insert_weather = "insert into forecast(city, tmef, wf, tmn, tmx) values(%s,%s,%s,%s,%s)"
+req = requests.get('http://www.weather.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=108')
+html = req.text
 
-insert_sql = "insert into forecast(city,tmef,wf,tmn,tmx) values(%s,%s,%s,%s,%s)"
+soup = BeautifulSoup(html, 'lxml')
+
 
 select_weather = "select tmef from forecast order by tmef desc limit 1"
-
-req = requests.get('https://www.weather.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=108')
-html = req.text
-soup = BeautifulSoup(html,'lxml')
-
 cur = conn.cursor()
-weather = {}
-body = soup.select_one('body')
 cur.execute(select_weather)
-last_date = cur.fetchone()
-print(last_date)
 
-for location in body.select('location'):
-  weather[location.find('city').text]=[]
-  city = location.city.text
-  for data in location.select('data'):
-    # tmef = data.tmef.text
-    # wf = data.wf.text
-    # tmn = data.tmn.text
-    # tmx = data.tmx.text
-    # cur.execute(insert_sql,(city,tmef,wf,tmn,tmx))
-    # conn.commit()
-    temp = []
-    if (last_date is None) or (str(last_date[0]) < data.find('tmef').text):
-      temp.append(data.find('tmef').text)
-      temp.append(data.find('wf').text)
-      temp.append(data.find('tmn').text)
-      temp.append(data.find('tmx').text)
-      weather[location.find('city').string].append(temp)
-#print(weather)
+last_data = cur.fetchone()   # db  에 있는 최신날짜
+print(last_data)
+print(type(last_data))
+
+# print(soup.find_all('location'))
+weather = {}
+for i in soup.find_all('location') :
+    weather[i.find('city').text] = []
+    for j in i.find_all('data'):
+        temp = []
+        if (last_data   is None) or  (str(last_data[0]) < j.find('tmef').text ):
+            temp.append(j.find('tmef').text)
+            temp.append(j.find('wf').text)
+            temp.append(j.find('tmn').text)
+            temp.append(j.find('tmx').text)
+            weather[i.find('city').string].append(temp)
+            # print(temp)
+# print(weather)   
+
 for i in weather:
-  for j in weather[i]:
-    cur.execute(insert_sql,(i,j[0],[1],j[2],j[3]))
-    conn.commit()
+    for j in weather[i]:
+        cur = conn.cursor()
+        cur.execute(insert_weather, (i, j[0],j[1],j[2],j[3]))
+        conn.commit()     
+
+    
