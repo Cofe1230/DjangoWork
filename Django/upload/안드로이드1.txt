@@ -1,0 +1,103 @@
+https://developer.android.com/studio
+설치
+create device
+
+myapp02
+안드로이드 Toast
+안드로이드 intent
+
+
+
+myapp04
+binding
+weight
+layout
+chronometer//스탑워치
+calender//달력
+timepicker//시간
+
+myapp05
+chronometer//스탑워치
+tab
+webview 
+//인터넷 설정
+	<uses-permission android:name="android.permission.INTERNET"/>
+	android:usesCleartextTraffic="true"
+//
+menu
+contextmenu
+dialog
+dialog,toast (뷰)
+
+myapp06
+intent
+ratingBar
+main - intent
+main2 - ratingbar
+main3 - ratingBar + 배열
+main4 - main3을 bindng
+main5 - 양방향 intent
+main6 - 양방향 intent
+main7 - 양방향 intent 객체로
+
+myapp07
+main - 양방향 intent (launch)
+main2 - myapp06.main7을 launch방식으로
+main3 - 암시적 intent
+main4 - 엑티비티 생명주기
+main5 - listview
+main6 - listview 동적추가
+main7 - gridview
+
+myapp08
+main - recyclerView (grid layout)
+main2 - recyclerView (linear layout)
+
+
+myapp09
+main - fragment (직접만들기)
+main2 -fragment (fragment추가해서 만들기)
+
+myapp10
+main - aqlite 사용하기
+~main3-sqlite
+
+myapp11
+main - viewPager
+main2 - viewPager(FragmentStateAdapter사용)
+main3 - ViewPager(Fragment)+(tablayout)
+
+myapp12
+viewModel -화면 전환이 있을때 생명 주기를 따르지 않고 값을 저장 처리
+thread
+
+myapp13
+https://jsonplaceholder.typicode.com/에서 json데이터 읽고 recyclerview로 출력
+
+myapp14
+springboot 서버 만들어서 mysql db 사용 json으로 데이터 주고받으면서 처리
+SharedPreferences
+JWT 토큰 저장
+
+myapp15
+main1 Service
+
+https://it-of-fortune.tistory.com/9 // 사용자 인터페이스 구성요소
+https://mozi.tistory.com/582 // 안드로이드 프로젝트의 구성요소
+
+https://kadosholy.tistory.com/128  https://blog.naver.com/mjo1127/220958265002 //LinearLayout 속성
+
+https://wookkingkim.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-4%EB%8C%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8 //안드로이드 4대 컴포넌트(구성요소
+
+https://copymaster.tistory.com/entry/Android-%EA%B8%B0%EC%B4%88-nestedScrollView nestedScrollView
+
+dialog binding  : myapp05 mainactivity_user
+
+
+https://velog.io/@dear_jjwim/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-Api-key-%EC%88%A8%EA%B8%B0%EA%B3%A0-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0
+https://maejing.tistory.com/entry/Android-FCM%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4-Push-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0 fcm사용
+
+
+@OneToMany(mappedBy = "orderInfo",cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("orderInfo")
+	private List<OrderCount> orderList;

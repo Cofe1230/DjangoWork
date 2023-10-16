@@ -27,4 +27,9 @@ urlpatterns = [
     path('detail_idx/',views.detail_idx),
     path('detail/<int:board_idx>/',views.detail),
     path('delete/<int:board_idx>/',views.delete),
+    path('download_count/',views.download_count),
+    path('download/',views.download),
+    path('update_form/<int:board_idx>/',views.update_form),
+    path('update/',views.update),
+    path('comment_insert/',views.comment_insert),
 ]
