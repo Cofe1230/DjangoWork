@@ -55,6 +55,7 @@ def list(request):
   field = request.GET.get('field','title')
 
   #count
+  #Q연산자
   if field == 'all':
     boardCount = Board.objects.filter(Q(writer__contains=word)|
                                       Q(title__contains=word)|
@@ -97,6 +98,8 @@ def list(request):
 
   context={'boardList':boardList,
            'boardCount':boardCount,
+           'field':field,
+           'word':word,
            'startPage':startPage,
            'endPage' : endPage,
            'totPage' : totPage,
