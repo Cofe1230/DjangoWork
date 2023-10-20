@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('write_form/', views.write_form),
     path('insert/', views.insert),
+    path('signup/', views.signup),
 ]   

@@ -1,10 +1,25 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from myapp02.models import Board
+from .form import UserForm
 
 # Create your views here.
 
 UPLOAD_DIR = 'C:/Users/it/Desktop/GitClone/DjangoWork/Django/upload/'
+
+#signup
+def signup(request):
+  if request.method == 'POST':
+    form = UserForm(request.POST)
+    if form.is_valid():
+      print('ttt')
+      form.save()
+    else :
+      print('sss')
+  else:
+    form = UserForm()
+
+  return render(request,'common/signup.html',{'form' : form })
 
 #write_form
 def write_form(request):
