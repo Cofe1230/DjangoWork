@@ -12,19 +12,34 @@
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand/logo -->
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="/">Home</a>
     
     <!-- Links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="/write_form">Insert</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/list">List</a>
+        <a class="nav-link" href="/boardlist">List</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/signup">signup</a>
       </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">로그아웃({{user.username}})</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="/login">로그인</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signup">회원가입</a>
+      </li>
+      {% endif %}
     </ul>
   </nav>
   <br/>

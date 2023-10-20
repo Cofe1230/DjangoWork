@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="container">
+  <h2>글보기</h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>번호</th>
+        <td>{{board.id}}</td>
+        <th>조회수</th>
+        <td>{{board.hit}}</td>
+      </tr>
+      <tr>
+        <th>작성자</th>
+        <td>{{board.writer}}</td>
+        <th>작성일</th>
+        <td>{{board.post_date|date:'Y.m.d'}}</td>
+      </tr>
+      <tr>
+        <th>제목</th>
+        <td>{{board.title}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">{{board.content}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary">수정</button>
+  <button class="btn btn-danger">삭제</button>
+</div>
+{% endblock%}

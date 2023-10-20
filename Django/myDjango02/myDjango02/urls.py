@@ -17,10 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp02 import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('',views.boardlist),
     path('admin/', admin.site.urls),
     path('write_form/', views.write_form),
+    path('boardlist/', views.boardlist),
+    path('board/<int:board_id>/', views.detail),
     path('insert/', views.insert),
     path('signup/', views.signup),
+    path('login/', 
+         auth_views.LoginView.as_view(template_name='common/login.html'),
+         name='login'),
+    path('logout/',auth_views.LogoutView.as_view(), name='logout')
 ]   
