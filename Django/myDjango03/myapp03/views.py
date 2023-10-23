@@ -1,13 +1,36 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from myapp03.models import Board
 from django.db.models import Q
 from django.core.paginator import Paginator
+###
+import json
+from myapp03 import dataProcess
 
 #UPLOAD_DIR
 UPLOAD_DIR = 'C:/Users/it/Desktop/GitClone/DjangoWork/Django/upload/'
 
+#wordcloud
+def wordcloud(request):
+  a_path = "C:/Users/it/Desktop/GitClone/DjangoWork/Django/myDjango03/data/"
+  data = json.loads(open(a_path+'4차 산업혁명.json','r',encoding='utf-8').read())
+
+  dataProcess.make_wordCloud(data)
+
+  return render(request,'bigdata/word.html',{'img_data' : 'k_wordCloud.png'})
+
+#wordcloud2
+def wordcloud2(request):
+  a_path = "C:/Users/it/Desktop/GitClone/DjangoWork/Django/myDjango03/data/"
+  data = json.loads(open(a_path+'4차 산업혁명.json','r',encoding='utf-8').read())
+
+  dataProcess.make_wordCloud2(data)
+
+  return render(request,'bigdata/word.html',{'img_data' : 'pytag_word.png'})
+
 #board_form
+@login_required(login_url='/login/')
 def board_form(request):
   return render(request,'board/insert.html')
 
@@ -25,8 +48,7 @@ def board_insert(request):
     for chunk in file.chunks():
       fp.write(chunk)
     fp.close()
-  id = request.POST['writer_id']
-  dto = Board(writer_id=id,
+  dto = Board(writer = request.user,
               title = request.POST['title'],
               content = request.POST['content'],
               filename = fname,
