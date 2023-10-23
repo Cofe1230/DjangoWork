@@ -24,11 +24,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('write_form/', views.write_form),
     path('boardlist/', views.boardlist),
-    path('board/<int:board_id>/', views.detail),
+     path('list_page/',views.list_page),
+    path('boards/<int:board_id>/', views.detail),
     path('insert/', views.insert),
+    path('comment_insert/', views.comment_insert),
     path('signup/', views.signup),
     path('login/', 
          auth_views.LoginView.as_view(template_name='common/login.html'),
          name='login'),
-    path('logout/',auth_views.LogoutView.as_view(), name='logout')
+    path('logout/',auth_views.LogoutView.as_view(), name='logout'),
+    
 ]   

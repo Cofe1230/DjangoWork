@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from myapp02.models import Board
+from myapp02.models import Board, Comment
 from django.db.models import Q
 from .form import UserForm
+from django.core.paginator import Paginator
 
 import math
 
@@ -51,7 +52,7 @@ def insert(request):
               )
   dto.save()
       
-  return redirect("/write_form/")
+  return redirect("/list_page/")
 
 #boardlist
 def boardlist(request):
@@ -120,3 +121,42 @@ def detail(request, board_id):
   board.hit_up()
   board.save()
   return render(request,'board/detail.html',{'board':board})
+
+#list_page
+def list_page(request):
+  page = request.GET.get('page',1)
+  word = request.GET.get('word','')
+
+  boardCount = Board.objects.filter(
+    Q(writer__contains = word)|
+    Q(title__contains = word)|
+    Q(content__contains = word)).count()
+  
+  boardList = Board.objects.filter(
+    Q(writer__contains = word)|
+    Q(title__contains = word)|
+    Q(content__contains = word)).order_by('-id')
+  
+  #페이징 처리
+  pageSize = 5
+
+  paginator =  Paginator(boardList,pageSize)
+  page_obj = paginator.get_page(page)
+  print('page_obj : ', page_obj)
+
+
+  context = {
+    'boardCount' : boardCount,
+    'page_list' : page_obj,
+    'word' : word,
+  }
+  return render(request, 'board/list_page.html', context)
+
+#comment_insert
+@csrf_exempt
+def comment_insert(request):
+  id = request.POST['board_id']
+  comment = Comment(writer='aa', board_id = id,
+                    content = request.POST['content'])
+  comment.save()
+  return redirect('/boards/'+id)
