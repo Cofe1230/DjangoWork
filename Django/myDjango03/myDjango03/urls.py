@@ -36,5 +36,7 @@ urlpatterns = [
     #####
     path('wordcloud/',views.wordcloud),
     path('wordcloud2/',views.wordcloud2),
+    path('melon/',views.melon),
+    path('map/',views.map),
     
 ]

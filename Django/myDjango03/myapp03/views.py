@@ -29,6 +29,13 @@ def wordcloud2(request):
 
   return render(request,'bigdata/word.html',{'img_data' : 'pytag_word.png'})
 
+#melon
+def melon(request):
+  #순위, 곡명, 가수, 앨범
+  data = []
+  dataProcess.melon_crawring(data)
+  return render(request, 'bigdata/melon.html',{'data':data})
+
 #board_form
 @login_required(login_url='/login/')
 def board_form(request):
@@ -92,3 +99,8 @@ def board_detail(request,board_id):
   board.hit_up()
   board.save()
   return render(request,'board/detail.html',{'board':board})
+
+#map
+def map(request):
+  dataProcess.map()
+  return render(request,'bigdata/map.html')
