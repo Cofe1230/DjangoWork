@@ -113,3 +113,19 @@ def map():
 
     folium.Marker([sub_lat,sub_long],tooltip=title).add_to(m)
     m.save(os.path.join(TEMPLATE_DIR,'bigdata/maptest.html'))
+
+#movie crawing
+def movie_crawing(data):
+  req = requests.get('http://movie.daum.net/ranking/reservation')
+  if req.ok:
+    soup = BeautifulSoup(req.text, 'html.parser')
+    #평점 제목 예매율
+    ol = soup.select_one('#mainContent > div > div.box_ranking > ol')
+    lis = ol.select('li')
+    for li in lis:
+      title = li.select_one('div > div.thumb_cont > strong > a').get_text()
+      grade = li.select_one('div > div.thumb_cont > span.txt_append > span:nth-child(1) > span').get_text()
+      reserve = li.select_one('div > div.thumb_cont > span.txt_append > span:nth-child(2) > span').get_text()
+      reserve = re.sub(r'[%]','',reserve)
+      data.append([title, float(grade), float(reserve)])
+      

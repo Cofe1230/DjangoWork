@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 ###
 import json
 from myapp03 import dataProcess
+import pandas as pd
 
 #UPLOAD_DIR
 UPLOAD_DIR = 'C:/Users/it/Desktop/GitClone/DjangoWork/Django/upload/'
@@ -35,6 +36,19 @@ def melon(request):
   data = []
   dataProcess.melon_crawring(data)
   return render(request, 'bigdata/melon.html',{'data':data})
+
+#movie_chart
+def movie_chart(request):
+  data = []
+  dataProcess.movie_crawing(data)
+  #print(data)
+  df = pd.DataFrame(data, columns=['제목','평점','예매율'])
+  #print(df)
+  #group_title = df.groupby('제목')
+  group_mean = df.groupby('제목')['평점'].mean().sort_values(ascending=False).head(10)
+  print(group_mean)
+  #dataProcess.movie_daum_chart()
+  return render(request,'bigdata/movie_daum.html')
 
 #board_form
 @login_required(login_url='/login/')
