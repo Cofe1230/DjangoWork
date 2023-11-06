@@ -1,5 +1,5 @@
 """
-URL configuration for myDjango02 project.
+URL configuration for djangotest project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,22 +16,36 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from myapp02 import views
+from test01 import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('',views.boardlist),
+    path('',views.board_list),
     path('admin/', admin.site.urls),
-    path('write_form/', views.write_form),
-    path('boardlist/', views.boardlist),
-    path('list_page/',views.list_page),
-    path('boards/<int:board_id>/', views.detail),
-    path('insert/', views.insert),
+
+    path('board_form/', views.board_form),
+    path('board_insert/',views.board_insert),
+    path('boards/',views.board_list),
+    path('boards/<int:board_id>/', views.board_detail),
     path('comment_insert/', views.comment_insert),
-    path('signup/', views.signup),
+
+    path('movie_chart/', views.movie_chart),
+    path('movie/', views.movie),
+    path('movie_dbchart/', views.movie_dbchart),
+    path('weather/', views.weather),
+    
+    #####
     path('login/', 
          auth_views.LoginView.as_view(template_name='common/login.html'),
          name='login'),
     path('logout/',auth_views.LogoutView.as_view(), name='logout'),
+    path('signup/', views.signup),
+
+    #####
+    path('wordcloud/',views.wordcloud),
+    path('wordcloud2/',views.wordcloud2),
+    path('melon/',views.melon),
+    path('map/',views.map),
+    path('movie_chart/', views.movie_chart),
     
-]   
+]

@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+  <script src="{% static 'js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+  <title>Django</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="/">Test</a>
+    
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/board_form">Insert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/boards">List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/wordcloud">워드클라우드</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/wordcloud2">워드클라우드2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/melon">멜론</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/map">지도</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movie_chart">영화차트</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movie">영화크롤링(DB)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/movie_dbchart">영화평점차트(DB)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/weather">날씨</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">로그아웃({{user.username}})</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="/login">로그인</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signup">회원가입</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <br/>
+  <!-- 기본 템플릿 안에 삽입될 내용 start -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- 자바스크립트 start -->
+  {% block script %}
+  {% endblock %}
+</body>
+</html>

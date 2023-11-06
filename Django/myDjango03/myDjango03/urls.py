@@ -33,6 +33,7 @@ urlpatterns = [
          name='login'),
     path('logout/',auth_views.LogoutView.as_view(), name='logout'),
     
+
     #####
     path('wordcloud/',views.wordcloud),
     path('wordcloud2/',views.wordcloud2),
